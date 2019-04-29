@@ -1,5 +1,5 @@
-import NuxtConfiguration from '@nuxt/config'
-import pkg from './package.json'
+import NuxtConfiguration from '@nuxt/config';
+import pkg from './package.json';
 
 const config: NuxtConfiguration = {
   mode: 'universal',
@@ -61,10 +61,10 @@ const config: NuxtConfiguration = {
           test: /\.(ts|js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
+};
 
-export default config
+export default config;
