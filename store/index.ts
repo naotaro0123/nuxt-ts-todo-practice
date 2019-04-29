@@ -1,10 +1,6 @@
 /* eslint-disable no-console */
 import Vuex from 'vuex';
-
-interface Todo {
-  content: string;
-  created: string;
-}
+import { Todo } from '~/components/interface/Todo';
 
 const todoList: Todo[] = [
   {
@@ -25,13 +21,16 @@ const createStore = () => {
     mutations: {
       insert: (state, todo: Todo) => {
         const date = new Date();
-        const formatedDate = `
-          ${date.getFullYear()}
-          -${('00' + (date.getMonth() + 1)).slice(-2)}
-          -${('00' + (date.getDate() + 1)).slice(-2)}
-          -${('00' + (date.getHours() + 1)).slice(-2)}
-          :${('00' + (date.getMinutes() + 1)).slice(-2)}
-        `;
+        const formatedDate =
+          date.getFullYear() +
+          '-' +
+          ('00' + (date.getMonth() + 1)).slice(-2) +
+          '-' +
+          ('00' + (date.getDate() + 1)).slice(-2) +
+          '-' +
+          ('00' + (date.getHours() + 1)).slice(-2) +
+          ':' +
+          ('00' + (date.getMinutes() + 1)).slice(-2);
         state.todos.unshift({
           content: todo.content,
           created: formatedDate

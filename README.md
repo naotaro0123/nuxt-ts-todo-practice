@@ -1,6 +1,8 @@
 # nuxt-ts-todo
 
 > Nuxt.jsにTypeScriptを導入して簡単なTodoを作ってみる
+> 目的：Nuxt.jsを使ったベストな環境を模索する
+
 
 ## 環境セットアップ手順
 
