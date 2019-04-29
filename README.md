@@ -1,4 +1,4 @@
-# nuxt-ts-todo
+# nuxt-ts-todo-practice
 
 > Nuxt.jsにTypeScriptを導入して簡単なTodoを作ってみる
 > 目的：Nuxt.jsを使ったベストな環境を模索する
@@ -10,10 +10,10 @@
 
 ## 参考記事
 [【Nuxt.js】todoアプリを作成してみた①](https://qiita.com/ayapon/items/d93807e7699434279531)  
-こちらの記事を参考にTypeScript化しました
+こちらの記事を参考にTodoアプリをTypeScript化しました
 
 
-## 使用してるスキル
+## 使用スタック
 - Nuxt.js
 - Vuex
 - TypeScript

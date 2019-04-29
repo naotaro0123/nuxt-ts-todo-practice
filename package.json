@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-ts-todo",
+  "name": "nuxt-ts-todo-practice",
   "version": "1.0.0",
   "description": "Nuxt.jsにTypeScriptを導入して簡単なTodoを作ってみる",
   "author": "naotaro0123",
