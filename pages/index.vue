@@ -7,18 +7,17 @@
         v-model="content"
         type="text"
         name="content"
+        placeholder="Input Todo"
         @focus="setFindStatus"
       />
-    </p>
-    <div>
       <button @click="insert">save</button>
       <button @click="find">find</button>
-    </div>
+    </p>
     <ul>
       <li v-for="(todo, index) in showTodos" :key="index">
         <span>{{ todo.content }}</span>
         <span>({{ todo.created }})</span>
-        <span>x</span>
+        <span @click="remove(todo)">X</span>
       </li>
     </ul>
   </section>
@@ -68,6 +67,9 @@ export default Vue.extend({
         this.isFind = false;
         this.content = '';
       }
+    },
+    remove(todo) {
+      this.$store.commit('remove', todo);
     }
   }
 });
@@ -75,6 +77,44 @@ export default Vue.extend({
 
 <style lang="scss">
 .container {
-  margin: 50px;
+  h1 {
+    font-size: 32pt;
+  }
+
+  p {
+    width: 390px;
+    height: 40px;
+    justify-content: center;
+    display: flex;
+  }
+
+  input {
+    width: 220px;
+    height: 100%;
+    padding: 8px 4px;
+    font-size: 14pt;
+  }
+
+  button {
+    width: 50px;
+    height: 100%;
+    font-size: 12pt;
+  }
+
+  ul {
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    list-style: none;
+    margin: 5px 0;
+    font-size: 14pt;
+  }
+
+  span {
+    margin: 0 5px;
+  }
 }
 </style>
