@@ -26,8 +26,13 @@ const createStore = () => {
     state: () => ({
       todos: todoList
     }),
+    getters: {
+      todos: state => {
+        return state.todos;
+      }
+    },
     mutations: {
-      insert: (state, todo: Todo) => {
+      insert: (state, content) => {
         const date = new Date();
         const formatedDate =
           date.getFullYear() +
@@ -40,7 +45,7 @@ const createStore = () => {
           ':' +
           ('00' + (date.getMinutes() + 1)).slice(-2);
         state.todos.unshift({
-          content: todo.content,
+          content: content,
           created: formatedDate
         });
       },
@@ -56,6 +61,14 @@ const createStore = () => {
             return;
           }
         }
+      }
+    },
+    actions: {
+      insert({ commit }, content) {
+        commit('insert', content);
+      },
+      remove({ commit }, todo) {
+        commit('remove', todo);
       }
     }
   });

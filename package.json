@@ -17,7 +17,9 @@
     "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
     "nuxt": "^2.4.0",
-    "ts-node": "^8.1.0"
+    "ts-node": "^8.1.0",
+    "vuex-class": "^0.3.2",
+    "vuex-type-helper": "^1.2.2"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.6.3",
