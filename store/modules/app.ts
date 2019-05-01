@@ -1,4 +1,5 @@
-import Vuex, { createNamespacedHelpers } from 'vuex';
+/* eslint-disable no-console */
+import { createNamespacedHelpers } from 'vuex';
 import {
   DefineActions,
   DefineGetters,
@@ -34,25 +35,28 @@ export interface Getters {
 }
 
 export interface Mutations {
-  insert: {};
-  remove: {};
+  insert: { content: string };
+  remove: { todo: Todo };
 }
 
 export interface Actions {
-  insertAction: {};
-  removeAction: {};
+  insertAction: { content: string };
+  removeAction: { todo: Todo };
 }
 
-export const state: State = {
+// export const state: State = {
+//   todos: todoList
+// };
+export const state = () => ({
   todos: todoList
-};
+});
 
 export const getters: DefineGetters<Getters, State> = {
   todos: state => state.todos
 };
 
 export const mutations: DefineMutations<Mutations, State> = {
-  insert: (state, payload) => {
+  insert: (state, { content }) => {
     const date = new Date();
     const formatedDate =
       date.getFullYear() +
@@ -65,19 +69,17 @@ export const mutations: DefineMutations<Mutations, State> = {
       ':' +
       ('00' + (date.getMinutes() + 1)).slice(-2);
     state.todos.unshift({
-      content: (<Todo>payload).content,
+      content: content,
       created: formatedDate
     });
   },
-  remove: (state, payload) => {
-    const todo = <Todo>payload;
+  remove: (state, { todo }) => {
     for (let i = 0; i < state.todos.length; i++) {
       const stateTodos = state.todos[i];
       if (
         stateTodos.content === todo.content &&
         stateTodos.created === todo.created
       ) {
-        // eslint-disable-next-line no-console
         console.log(`remove ${todo.content}`);
         state.todos.splice(i, 1);
         return;
@@ -87,11 +89,11 @@ export const mutations: DefineMutations<Mutations, State> = {
 };
 
 export const actions: DefineActions<Actions, State, Mutations, Getters> = {
-  insertAction({ commit }, payload) {
-    commit('insert', payload);
+  insertAction({ commit }, content) {
+    commit('insert', content);
   },
-  removeAction({ commit }, payload) {
-    commit('remove', payload);
+  removeAction({ commit }, todo) {
+    commit('remove', todo);
   }
 };
 
@@ -99,7 +101,7 @@ export const {
   mapState,
   mapGetters,
   mapMutations,
-  mapActions,
+  mapActions
 } = createNamespacedHelpers<State, Getters, Mutations, Actions>('app');
 
 export const app = {
@@ -107,5 +109,5 @@ export const app = {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };

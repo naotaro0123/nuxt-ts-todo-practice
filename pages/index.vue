@@ -25,9 +25,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapGetters } from 'vuex';
 import Logo from '~/components/Logo.vue';
 import { Todo } from '~/components/interface/Todo';
+import * as app from '~/store/modules/app';
 
 export default Vue.extend({
   components: {
@@ -40,7 +40,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapGetters(['todos']),
+    ...app.mapGetters(['todos']),
     showTodos(): Todo[] {
       if (!this.isFind) {
         return this.todos;
@@ -55,8 +55,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    ...app.mapActions(['insertAction', 'removeAction']),
     insert() {
-      this.$store.dispatch('insert', this.content);
+      this.insertAction({ content: this.content });
       this.content = '';
     },
     find() {
@@ -69,7 +70,7 @@ export default Vue.extend({
       }
     },
     remove(todo) {
-      this.$store.dispatch('remove', todo);
+      this.removeAction(todo);
     }
   }
 });
