@@ -1,5 +1,5 @@
-import NuxtConfiguration from '@nuxt/config'
-import pkg from './package.json'
+import NuxtConfiguration from '@nuxt/config';
+import pkg from './package.json';
 
 const config: NuxtConfiguration = {
   mode: 'universal',
@@ -25,7 +25,9 @@ const config: NuxtConfiguration = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'pages/style.css'
+  ],
 
   /*
    ** Plugins to load before mounting the App
@@ -61,10 +63,10 @@ const config: NuxtConfiguration = {
           test: /\.(ts|js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
+};
 
-export default config
+export default config;

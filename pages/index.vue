@@ -1,68 +1,121 @@
 <template>
   <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        todo
-      </h1>
-      <h2 class="title-subtitle">
-        My great Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
-    </div>
+    <Logo />
+    <h1>Todo App</h1>
+    <p>
+      <input
+        v-model="content"
+        type="text"
+        name="content"
+        placeholder="Input Todo"
+        @focus="setFindStatus"
+      />
+      <button @click="insert">save</button>
+      <button @click="find">find</button>
+    </p>
+    <ul>
+      <li v-for="(todo, index) in showTodos" :key="index">
+        <span>{{ todo.content }}</span>
+        <span>({{ todo.created }})</span>
+        <span @click="remove(todo)">X</span>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Logo from '~/components/Logo.vue'
+import Vue from 'vue';
+import { mapGetters, mapActions } from 'vuex';
+import Logo from '~/components/Logo.vue';
+import { Todo } from '~/components/interface/Todo';
 
 export default Vue.extend({
   components: {
     Logo
+  },
+  data() {
+    return {
+      content: '',
+      isFind: false
+    };
+  },
+  computed: {
+    ...mapGetters(['todos']),
+    showTodos(): Todo[] {
+      if (!this.isFind) {
+        return this.todos;
+      } else {
+        const data = this.todos.filter(element => {
+          return element.content
+            .toLowerCase()
+            .includes(this.content.toLowerCase());
+        });
+        return data;
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['insertAction', 'removeAction']),
+    insert() {
+      this.insertAction(this.content);
+      this.content = '';
+    },
+    find() {
+      this.isFind = true;
+    },
+    setFindStatus() {
+      if (this.isFind) {
+        this.isFind = false;
+        this.content = '';
+      }
+    },
+    remove(todo) {
+      this.removeAction(todo);
+    }
   }
-})
+});
 </script>
 
 <style lang="scss">
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-
-  &-subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
+  h1 {
+    font-size: 32pt;
   }
-}
 
-.links {
-  padding-top: 15px;
+  p {
+    width: 390px;
+    height: 40px;
+    justify-content: center;
+    display: flex;
+  }
+
+  input {
+    width: 220px;
+    height: 100%;
+    padding: 8px 4px;
+    font-size: 14pt;
+  }
+
+  button {
+    width: 50px;
+    height: 100%;
+    font-size: 12pt;
+  }
+
+  ul {
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    list-style: none;
+    margin: 5px 0;
+    font-size: 14pt;
+  }
+
+  span {
+    margin: 0 5px;
+  }
 }
 </style>
