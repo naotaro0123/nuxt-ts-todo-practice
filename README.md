@@ -24,21 +24,38 @@
 
 ``` bash
 # install dependencies
-$ npm install
+$ yarn
 
 # serve with hot reload at localhost:3000
-$ npm run dev
+$ yarn dev
 
 # build for production and launch server
-$ npm run build
-$ npm start
+$ yarn build
+$ yarn start
 
 # generate static project
-$ npm run generate
+$ yarn generate
 
 # Jest Test
-$ npm run test
+$ yarn test
 
 # Lint Fix
-$ npm run lint
+$ yarn lint
+
+# storybook with hot reload at localhost:9001
+$ yarn storybook
+
 ```
+
+## storybook Run Error
+
+2019/06/02現在
+`yarn storybook` 実行時に `babel-preset-vue` エラーがでる。
+
+[framework-preset-vue requires `babel-preset-vue` but does not depend on it #4475](https://github.com/storybookjs/storybook/issues/4475)
+
+現状は、以下ファイルの `, require.resolve('babel-preset-vue')` 部分をDeleteすると実行できる。修正を待つしかない
+
+@storybook/vue/src/server/framework-preset.vue.js  
+@storybook/vue/dist/server/framework-preset.vue.js  
+
