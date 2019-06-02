@@ -55,7 +55,7 @@ export const mutations = {
         stateTodos.content === todo.content &&
         stateTodos.created === todo.created
       ) {
-        console.log(`remove ${todo.content}`);
+        // console.log(`remove ${todo.content}`);
         state.todos.splice(i, 1);
         return;
       }
