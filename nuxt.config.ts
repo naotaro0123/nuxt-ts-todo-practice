@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import NuxtConfiguration from '@nuxt/config';
 import pkg from './package.json';
 
@@ -25,9 +26,7 @@ const config: NuxtConfiguration = {
   /*
    ** Global CSS
    */
-  css: [
-    'pages/style.css'
-  ],
+  css: ['pages/style.css'],
 
   /*
    ** Plugins to load before mounting the App

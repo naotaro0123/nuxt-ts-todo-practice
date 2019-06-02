@@ -27,6 +27,7 @@
 import Vue from 'vue';
 import { mapGetters, mapActions } from 'vuex';
 import Logo from '~/components/Logo.vue';
+// eslint-disable-next-line no-unused-vars
 import { Todo } from '~/components/interface/Todo';
 
 export default Vue.extend({
