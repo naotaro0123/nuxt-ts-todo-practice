@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import NuxtConfiguration from '@nuxt/config';
 import pkg from './package.json';
+// const extendConfig = require('./webpack.config.extend');
 
 const config: NuxtConfiguration = {
   mode: 'universal',
@@ -55,6 +56,8 @@ const config: NuxtConfiguration = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+      // exntend Webpack Config
+      // extendConfig(config);
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module!.rules.push({
